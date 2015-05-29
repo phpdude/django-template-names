@@ -1,17 +1,20 @@
 import re
 
-__version__ = (0, 1, 0)
+__version__ = (0, 2, 0)
 
 _underscorer1 = re.compile(r'(.)([A-Z][a-z]+)')
 _underscorer2 = re.compile('([a-z0-9])([A-Z])')
 
 
-def get_app_template_folder(module):
+def get_app_template_folder(module, depth=1):
     m = module.split('.')
     if not m:
         return ''
 
-    return (m[-2] if m[-1] == 'views' else m[1]).lower()
+    if m[-1] == 'views':
+        m.pop(-1)
+
+    return "/".join(m[-depth:]).lower()
 
 
 def camel_to_snake(s):
@@ -21,6 +24,7 @@ def camel_to_snake(s):
 
 class TemplateNames(object):
     template_name = None
+    app_path_depth = 1
 
     def get_template_exts(self):
         return ['html', 'jinja']
@@ -32,7 +36,7 @@ class TemplateNames(object):
         return [self.template_name]
 
     def _generate_normalized_template_names(self):
-        module = get_app_template_folder(self.__module__)
+        module = get_app_template_folder(self.__module__, depth=self.app_path_depth)
         template = camel_to_snake(self.__class__.__name__)
 
         return tuple("%s/%s.%s" % (module, template, ext) for ext in self.get_template_exts())

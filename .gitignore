@@ -1,2 +1,4 @@
 /django_template_names.egg-info
 /.idea
+*.pyc
+.cache

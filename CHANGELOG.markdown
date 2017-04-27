@@ -1,3 +1,8 @@
+v0.2.1
+------
+
+Added code comments and tests
+
 v0.2.0
 ------
 

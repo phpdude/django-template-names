@@ -1,4 +1,4 @@
-# [Django Template Names](https://github.com/phpdude/django-template-names/) v0.2.0 - templates names normalization helper.
+# [Django Template Names](https://github.com/phpdude/django-template-names/) v0.2.1 - templates names normalization helper.
 
 Django Template Names is a small mixin which allows you to simply normalize your CBV templates names.
  
